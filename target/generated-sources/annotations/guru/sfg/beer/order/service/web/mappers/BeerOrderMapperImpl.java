@@ -3,6 +3,7 @@ package guru.sfg.beer.order.service.web.mappers;
 import guru.sfg.beer.order.service.domain.BeerOrder;
 import guru.sfg.beer.order.service.domain.BeerOrder.BeerOrderBuilder;
 import guru.sfg.beer.order.service.domain.BeerOrderLine;
+import guru.sfg.beer.order.service.domain.BeerOrderStatusEnum;
 import guru.sfg.beer.order.service.domain.Customer;
 import guru.sfg.beer.order.service.web.model.BeerOrderDto;
 import guru.sfg.beer.order.service.web.model.BeerOrderDto.BeerOrderDtoBuilder;
@@ -19,7 +20,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-01-11T13:17:51+0530",
+    date = "2022-01-11T15:37:19+0530",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.13 (Oracle Corporation)"
 )
 @Component
@@ -103,7 +104,7 @@ public class BeerOrderMapperImpl implements BeerOrderMapper {
         return list;
     }
 
-    protected OrderStatusEnum orderStatusEnumToOrderStatusEnum(guru.sfg.beer.order.service.domain.OrderStatusEnum orderStatusEnum) {
+    protected OrderStatusEnum orderStatusEnumToOrderStatusEnum(BeerOrderStatusEnum orderStatusEnum) {
         if ( orderStatusEnum == null ) {
             return null;
         }
@@ -136,19 +137,19 @@ public class BeerOrderMapperImpl implements BeerOrderMapper {
         return set;
     }
 
-    protected guru.sfg.beer.order.service.domain.OrderStatusEnum orderStatusEnumToOrderStatusEnum1(OrderStatusEnum orderStatusEnum) {
+    protected BeerOrderStatusEnum orderStatusEnumToOrderStatusEnum1(OrderStatusEnum orderStatusEnum) {
         if ( orderStatusEnum == null ) {
             return null;
         }
 
-        guru.sfg.beer.order.service.domain.OrderStatusEnum orderStatusEnum1;
+        BeerOrderStatusEnum orderStatusEnum1;
 
         switch ( orderStatusEnum ) {
-            case NEW: orderStatusEnum1 = guru.sfg.beer.order.service.domain.OrderStatusEnum.NEW;
+            case NEW: orderStatusEnum1 = BeerOrderStatusEnum.NEW;
             break;
-            case READY: orderStatusEnum1 = guru.sfg.beer.order.service.domain.OrderStatusEnum.READY;
+            case READY: orderStatusEnum1 = BeerOrderStatusEnum.READY;
             break;
-            case PICKED_UP: orderStatusEnum1 = guru.sfg.beer.order.service.domain.OrderStatusEnum.PICKED_UP;
+            case PICKED_UP: orderStatusEnum1 = BeerOrderStatusEnum.PICKED_UP;
             break;
             default: throw new IllegalArgumentException( "Unexpected enum constant: " + orderStatusEnum );
         }

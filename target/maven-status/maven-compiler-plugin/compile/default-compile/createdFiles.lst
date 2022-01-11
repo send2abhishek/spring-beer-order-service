@@ -1,5 +1,6 @@
 guru/sfg/beer/order/service/repositories/BeerOrderRepository.class
 guru/sfg/beer/order/service/domain/BeerOrder.class
+guru/sfg/beer/order/service/config/JmsConfig.class
 guru/sfg/beer/order/service/repositories/CustomerRepository.class
 guru/sfg/beer/order/service/domain/BeerOrder$BeerOrderBuilder.class
 guru/sfg/beer/order/service/services/BeerOrderService.class
