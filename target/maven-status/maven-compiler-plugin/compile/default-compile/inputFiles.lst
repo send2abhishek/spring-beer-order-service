@@ -1,5 +1,6 @@
 /Users/abhishek160.kumar/Documents/projects/spring-boot/mssc-beer-microservice/mssc-beer-order-service/src/main/java/guru/sfg/beer/order/service/domain/Customer.java
 /Users/abhishek160.kumar/Documents/projects/spring-boot/mssc-beer-microservice/mssc-beer-order-service/src/main/java/guru/sfg/beer/order/service/services/BeerOrderService.java
+/Users/abhishek160.kumar/Documents/projects/spring-boot/mssc-beer-microservice/mssc-beer-order-service/src/main/java/guru/sfg/beer/order/service/domain/BeerOrderEventEnum.java
 /Users/abhishek160.kumar/Documents/projects/spring-boot/mssc-beer-microservice/mssc-beer-order-service/src/main/java/guru/sfg/beer/order/service/web/model/OrderStatusEnum.java
 /Users/abhishek160.kumar/Documents/projects/spring-boot/mssc-beer-microservice/mssc-beer-order-service/src/main/java/guru/sfg/beer/order/service/services/Beer/BeerService.java
 /Users/abhishek160.kumar/Documents/projects/spring-boot/mssc-beer-microservice/mssc-beer-order-service/src/main/java/guru/sfg/beer/order/service/web/controllers/BeerOrderController.java
@@ -13,6 +14,7 @@
 /Users/abhishek160.kumar/Documents/projects/spring-boot/mssc-beer-microservice/mssc-beer-order-service/src/main/java/guru/sfg/beer/order/service/BeerOrderServiceApplication.java
 /Users/abhishek160.kumar/Documents/projects/spring-boot/mssc-beer-microservice/mssc-beer-order-service/src/main/java/guru/sfg/beer/order/service/web/model/BeerDto.java
 /Users/abhishek160.kumar/Documents/projects/spring-boot/mssc-beer-microservice/mssc-beer-order-service/src/main/java/guru/sfg/beer/order/service/web/mappers/BeerOrderLineMapperDecorator.java
+/Users/abhishek160.kumar/Documents/projects/spring-boot/mssc-beer-microservice/mssc-beer-order-service/src/main/java/guru/sfg/beer/order/service/domain/BeerOrderStatusEnum.java
 /Users/abhishek160.kumar/Documents/projects/spring-boot/mssc-beer-microservice/mssc-beer-order-service/src/main/java/guru/sfg/beer/order/service/web/mappers/BeerOrderMapper.java
 /Users/abhishek160.kumar/Documents/projects/spring-boot/mssc-beer-microservice/mssc-beer-order-service/src/main/java/guru/sfg/beer/order/service/web/model/CustomerDto.java
 /Users/abhishek160.kumar/Documents/projects/spring-boot/mssc-beer-microservice/mssc-beer-order-service/src/main/java/guru/sfg/beer/order/service/repositories/BeerOrderRepository.java
@@ -20,9 +22,9 @@
 /Users/abhishek160.kumar/Documents/projects/spring-boot/mssc-beer-microservice/mssc-beer-order-service/src/main/java/guru/sfg/beer/order/service/web/model/BaseItem.java
 /Users/abhishek160.kumar/Documents/projects/spring-boot/mssc-beer-microservice/mssc-beer-order-service/src/main/java/guru/sfg/beer/order/service/web/mappers/DateMapper.java
 /Users/abhishek160.kumar/Documents/projects/spring-boot/mssc-beer-microservice/mssc-beer-order-service/src/main/java/guru/sfg/beer/order/service/domain/BaseEntity.java
+/Users/abhishek160.kumar/Documents/projects/spring-boot/mssc-beer-microservice/mssc-beer-order-service/src/main/java/guru/sfg/beer/order/service/sm/BeerOrderStateMachineConfig.java
 /Users/abhishek160.kumar/Documents/projects/spring-boot/mssc-beer-microservice/mssc-beer-order-service/src/main/java/guru/sfg/beer/order/service/services/TastingRoomService.java
 /Users/abhishek160.kumar/Documents/projects/spring-boot/mssc-beer-microservice/mssc-beer-order-service/src/main/java/guru/sfg/beer/order/service/web/model/BeerOrderPagedList.java
-/Users/abhishek160.kumar/Documents/projects/spring-boot/mssc-beer-microservice/mssc-beer-order-service/src/main/java/guru/sfg/beer/order/service/domain/OrderStatusEnum.java
 /Users/abhishek160.kumar/Documents/projects/spring-boot/mssc-beer-microservice/mssc-beer-order-service/src/main/java/guru/sfg/beer/order/service/config/TaskConfig.java
 /Users/abhishek160.kumar/Documents/projects/spring-boot/mssc-beer-microservice/mssc-beer-order-service/src/main/java/guru/sfg/beer/order/service/services/BeerOrderServiceImpl.java
 /Users/abhishek160.kumar/Documents/projects/spring-boot/mssc-beer-microservice/mssc-beer-order-service/src/main/java/guru/sfg/beer/order/service/bootstrap/BeerOrderBootStrap.java
