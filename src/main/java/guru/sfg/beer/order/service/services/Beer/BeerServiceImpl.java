@@ -1,11 +1,10 @@
 package guru.sfg.beer.order.service.services.Beer;
 
-import guru.sfg.beer.order.service.web.model.BeerDto;
+import guru.sfg.brewery.model.BeerDto;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Optional;
 import java.util.UUID;
