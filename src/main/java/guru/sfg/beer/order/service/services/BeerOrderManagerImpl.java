@@ -4,7 +4,8 @@ import guru.sfg.beer.order.service.domain.BeerOrder;
 import guru.sfg.beer.order.service.domain.BeerOrderEventEnum;
 import guru.sfg.beer.order.service.domain.BeerOrderStatusEnum;
 import guru.sfg.beer.order.service.repositories.BeerOrderRepository;
-import lombok.AllArgsConstructor;
+import guru.sfg.beer.order.service.sm.BeerOrderStateChangeInterceptor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.statemachine.StateMachine;
@@ -14,11 +15,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class BeerOrderManagerImpl implements BeerOrderManager {
-
+    public static final String ORDER_ID_HEADER = "ORDER_ID_HEADER";
     private final StateMachineFactory<BeerOrderStatusEnum, BeerOrderEventEnum> stateMachineFactory;
     private final BeerOrderRepository beerOrderRepository;
+    private final BeerOrderStateChangeInterceptor beerOrderStateChangeInterceptor;
 
     @Transactional
     @Override
@@ -28,7 +30,7 @@ public class BeerOrderManagerImpl implements BeerOrderManager {
         BeerOrder savedOrder = beerOrderRepository.save(beerOrder);
 
         // send the event of validate order
-        sendBeerOrderEvent(savedOrder,BeerOrderEventEnum.VALIDATE_ORDER);
+        sendBeerOrderEvent(savedOrder, BeerOrderEventEnum.VALIDATE_ORDER);
         return beerOrderRepository.save(beerOrder);
     }
 
@@ -36,8 +38,10 @@ public class BeerOrderManagerImpl implements BeerOrderManager {
         // get the state machine obj
         StateMachine<BeerOrderStatusEnum, BeerOrderEventEnum> sm = build(beerOrder);
 
-        //send message
-        Message<BeerOrderEventEnum> msg= MessageBuilder.withPayload(eventEnum).build();
+        //send message this will be read by state machine configuration, if state change detected there it can be intercepted by the interceptor
+        Message<BeerOrderEventEnum> msg = MessageBuilder.withPayload(eventEnum)
+                .setHeader(ORDER_ID_HEADER, beerOrder.getId().toString())
+                .build();
         sm.sendEvent(msg);
 
     }
@@ -49,9 +53,10 @@ public class BeerOrderManagerImpl implements BeerOrderManager {
 
         sm.stop();
 
-        // reset stateMachine status to beerOrderStatus
+        // reset stateMachine status to beerOrderStatus and resume the state machine
         sm.getStateMachineAccessor()
                 .doWithAllRegions(sma -> {
+                    sma.addStateMachineInterceptor(beerOrderStateChangeInterceptor);
                     sma.resetStateMachine(new DefaultStateMachineContext<>(beerOrder.getOrderStatus(), null, null, null));
                 });
 
