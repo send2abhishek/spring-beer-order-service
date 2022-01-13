@@ -42,6 +42,10 @@ public class BeerOrderManagerImpl implements BeerOrderManager {
 
         if (isValid) {
             sendBeerOrderEvent(beerOrder, BeerOrderEventEnum.VALIDATION_PASSED);
+
+            // fetch the fresh object, when we send the event defined at 44 it calls to save object in db so beerOrder object becomes stale. So fetch again with fresh
+            BeerOrder validatedOrder=beerOrderRepository.findOneById(beerOrderId);
+            sendBeerOrderEvent(validatedOrder, BeerOrderEventEnum.ALLOCATE_ORDER);
         } else {
             sendBeerOrderEvent(beerOrder, BeerOrderEventEnum.VALIDATION_FAILED);
         }

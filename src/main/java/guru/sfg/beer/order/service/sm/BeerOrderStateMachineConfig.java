@@ -16,9 +16,12 @@ import java.util.EnumSet;
 public class BeerOrderStateMachineConfig extends StateMachineConfigurerAdapter<BeerOrderStatusEnum, BeerOrderEventEnum> {
 
     private final Action<BeerOrderStatusEnum, BeerOrderEventEnum> validateOrderAction;
+    private final Action<BeerOrderStatusEnum, BeerOrderEventEnum> allocateOrderAction;
 
-    public BeerOrderStateMachineConfig(Action<BeerOrderStatusEnum, BeerOrderEventEnum> validateOrderAction) {
+    public BeerOrderStateMachineConfig(Action<BeerOrderStatusEnum, BeerOrderEventEnum> validateOrderAction,
+                                       Action<BeerOrderStatusEnum, BeerOrderEventEnum> allocateOrderAction) {
         this.validateOrderAction = validateOrderAction;
+        this.allocateOrderAction = allocateOrderAction;
     }
 
     @Override
@@ -38,7 +41,7 @@ public class BeerOrderStateMachineConfig extends StateMachineConfigurerAdapter<B
         transitions.withExternal()
                 .source(BeerOrderStatusEnum.NEW).target(BeerOrderStatusEnum.VALIDATION_PENDING)
                 .event(BeerOrderEventEnum.VALIDATE_ORDER)
-                .action(validateOrderAction) // when state changes
+                .action(validateOrderAction) // when state changes from new->validate_pending trigger this action
                 .and()
                 .withExternal()
                 .source(BeerOrderStatusEnum.NEW).target(BeerOrderStatusEnum.VALIDATED)
@@ -46,6 +49,11 @@ public class BeerOrderStateMachineConfig extends StateMachineConfigurerAdapter<B
                 .and()
                 .withExternal()
                 .source(BeerOrderStatusEnum.NEW).target(BeerOrderStatusEnum.VALIDATION_EXCEPTION)
-                .event(BeerOrderEventEnum.VALIDATION_FAILED);
+                .event(BeerOrderEventEnum.VALIDATION_FAILED)
+                .and()
+                .withExternal()
+                .source(BeerOrderStatusEnum.VALIDATED).target(BeerOrderStatusEnum.ALLOCATION_PENDING)
+                .event(BeerOrderEventEnum.ALLOCATE_ORDER) // when validation passed event called state changed to validated
+                .action(allocateOrderAction);
     }
 }
