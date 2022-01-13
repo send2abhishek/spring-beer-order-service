@@ -33,7 +33,7 @@ public class ValidateOrderAction implements Action<BeerOrderStatusEnum, BeerOrde
 
         String beerOrderId = (String) context.getMessage().getHeaders().get(BeerOrderManagerImpl.ORDER_ID_HEADER);
         BeerOrder beerOrder = repository.findOneById(UUID.fromString(beerOrderId));
-        // send msg to jms
+        // send msg to jms, it will be listened by the beerService
         jmsTemplate.convertAndSend(VALIDATE_ORDER_QUEUE,
                 ValidateOrderRequest.builder()
                         .beerOrderDto(beerOrderMapper.beerOrderToDto(beerOrder))
